@@ -5,1398 +5,477 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jame Carel M — Robotics & AI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #080a0c;
-    --deep: #0d1117;
-    --surface: #141a22;
-    --card: #1a2230;
-    --border: #1e2d3d;
-    --accent: #00e5ff;
-    --accent2: #ff6b35;
-    --accent3: #7fff6b;
-    --text: #c9d4e0;
-    --muted: #5a7080;
-    --white: #eef2f7;
-    --mono: 'Space Mono', monospace;
-    --display: 'Barlow Condensed', sans-serif;
-    --body: 'Barlow', sans-serif;
-  }
+:root {
+  --cream:#f5f2ed;--paper:#faf8f5;--white:#ffffff;
+  --navy:#0f1923;--navy2:#1a2a3a;--slate:#3d4f5f;--muted:#7a8c9a;
+  --rule:#ddd8d0;--orange:#d4490a;--ol:#f0ebe4;--om:#e8c5b0;
+  --display:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--navy);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,245,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;padding:0 4rem;height:64px}
+.nav-logo{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--navy);text-decoration:none}
+.nav-logo span{color:var(--orange)}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{font-family:var(--sans);font-size:.82rem;color:var(--slate);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--orange)}
+.nav-cta{color:var(--white)!important;background:var(--navy);padding:.5rem 1.2rem;border-radius:2px;transition:background .2s!important}
+.nav-cta:hover{background:var(--orange)!important}
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 400px;padding-top:64px}
+.hero-left{padding:7rem 4rem 6rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--rule)}
+.hero-right{background:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:var(--om);opacity:.2;pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.8rem}
+.hero-tag::before{content:'';display:block;width:24px;height:1px;background:var(--orange)}
+h1.hero-name{font-family:var(--display);font-size:clamp(3.5rem,7vw,6.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--navy);margin-bottom:1.5rem}
+h1.hero-name em{font-style:italic;color:var(--orange)}
+.hero-role{font-size:.95rem;color:var(--slate);margin-bottom:1.5rem;line-height:1.7}
+.hero-desc{font-size:.9rem;color:var(--slate);max-width:500px;line-height:1.9;margin-bottom:3rem}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-main{font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--white);background:var(--navy);border:1.5px solid var(--navy);padding:.75rem 1.8rem;text-decoration:none;border-radius:2px;transition:all .2s}
+.btn-main:hover{background:var(--orange);border-color:var(--orange)}
+.btn-out{font-family:var(--sans);font-size:.82rem;color:var(--navy);background:transparent;border:1.5px solid var(--rule);padding:.75rem 1.8rem;text-decoration:none;border-radius:2px;transition:all .2s}
+.btn-out:hover{border-color:var(--navy)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--rule)}
+.hs-num{font-family:var(--display);font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1}
+.hs-lbl{font-size:.7rem;color:var(--muted);margin-top:.2rem}
 
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: var(--body);
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* Profile card */
+.profile-card{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:2rem;margin-bottom:1.5rem;position:relative;z-index:1;text-align:center}
+.profile-photo{width:96px;height:96px;border-radius:50%;object-fit:cover;background:var(--cream);border:3px solid var(--rule);margin:0 auto 1rem;display:block}
+.profile-ph{width:96px;height:96px;border-radius:50%;background:var(--ol);border:3px solid var(--om);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--orange)}
+.profile-name{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.profile-title{font-size:.75rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.5}
+.profile-links{display:flex;flex-direction:column;gap:.4rem}
+.plink{display:flex;align-items:center;gap:.7rem;font-size:.76rem;color:var(--slate);text-decoration:none;padding:.35rem .6rem;border-radius:2px;transition:background .2s,color .2s}
+.plink:hover{background:var(--ol);color:var(--orange)}
+.plink-icon{font-family:var(--mono);font-size:.68rem;color:var(--orange);width:1.2rem;flex-shrink:0;text-align:center}
+.side-block{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--orange);padding:1.2rem 1.5rem;border-radius:0 4px 4px 0;position:relative;z-index:1}
+.side-lbl{font-family:var(--mono);font-size:.6rem;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.side-txt{font-size:.8rem;color:var(--slate);line-height:1.7}
+.side-txt strong{color:var(--navy);font-weight:500}
 
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 32px; height: 32px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.15s ease, width 0.2s, height 0.2s, opacity 0.2s;
-    transform: translate(-50%, -50%);
-    opacity: 0.5;
-  }
-  body:hover .cursor { opacity: 1; }
+/* SECTION COMMONS */
+.sw{max-width:1200px;margin:0 auto;padding:7rem 4rem}
+.sl{display:flex;align-items:baseline;gap:1rem;margin-bottom:3.5rem}
+.sn{font-family:var(--mono);font-size:.62rem;color:var(--orange);letter-spacing:.1em;background:var(--ol);padding:.2rem .6rem;border-radius:2px}
+.st{font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:var(--navy);letter-spacing:-.02em;line-height:1}
+.sr{flex:1;height:1px;background:var(--rule)}
 
-  /* GRID BACKGROUND */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ABOUT */
+#about{background:var(--white);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.at{font-size:.93rem;color:var(--slate);line-height:1.9;margin-bottom:1.2rem}
+.at strong{color:var(--navy);font-weight:500}
+.aq{border-left:3px solid var(--orange);padding:1rem 1.5rem;background:var(--ol);margin:2rem 0;font-family:var(--display);font-style:italic;font-size:.93rem;color:var(--navy2);line-height:1.7}
+.sk-ttl{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--rule)}
+.sk-grp{margin-bottom:1.5rem}
+.sk-gl{font-family:var(--mono);font-size:.6rem;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.sk-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.sk{font-family:var(--mono);font-size:.7rem;color:var(--slate);background:var(--cream);border:1px solid var(--rule);padding:.22rem .65rem;border-radius:2px;transition:all .2s}
+.sk:hover{border-color:var(--orange);color:var(--orange);background:var(--ol)}
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(8,10,12,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-links a:hover::after { width: 100%; }
+/* EXPERIENCE */
+#experience{background:var(--paper)}
+.ei{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--rule);padding:3rem 0;gap:3rem;transition:background .2s}
+.ei:last-child{border-bottom:1px solid var(--rule)}
+.ei:hover{background:rgba(212,73,10,.02)}
+.ed{font-family:var(--mono);font-size:.66rem;color:var(--orange);letter-spacing:.05em;line-height:1.8;margin-bottom:.3rem}
+.el{font-size:.7rem;color:var(--muted)}
+.ec{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:.3rem;letter-spacing:-.01em}
+.eb{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--orange);padding:.12rem .55rem;border-radius:2px;margin-left:.6rem;vertical-align:middle;position:relative;top:-2px}
+.er{font-size:.78rem;color:var(--muted);margin-bottom:1.2rem}
+.ebulls{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.ebulls li{font-size:.87rem;color:var(--slate);line-height:1.75;padding-left:1.1rem;position:relative}
+.ebulls li::before{content:'—';position:absolute;left:0;color:var(--orange);font-size:.8rem}
+.ebulls li strong{color:var(--navy);font-weight:500}
 
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-  }
+/* PROJECTS */
+#projects{background:var(--white);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.fr{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:3rem}
+.fb{font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;color:var(--muted);background:transparent;border:1px solid var(--rule);padding:.38rem .9rem;border-radius:2px;cursor:pointer;transition:all .2s}
+.fb:hover,.fb.active{color:var(--orange);border-color:var(--orange);background:var(--ol)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--rule);border:1.5px solid var(--rule)}
+.pc{background:var(--white);display:flex;flex-direction:column;overflow:hidden;transition:background .2s}
+.pc.wide{grid-column:span 2}
+.pc:hover{background:var(--paper)}
+.pc:hover .pt{color:var(--orange)}
+.piw{width:100%;aspect-ratio:16/9;background:var(--cream);overflow:hidden;position:relative;flex-shrink:0}
+.piw img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.pc:hover .piw img{transform:scale(1.03)}
+.pp{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--ol);position:relative}
+.pp::after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(212,73,10,.04) 8px,rgba(212,73,10,.04) 9px)}
+.ppt{font-family:var(--display);font-size:1.2rem;font-weight:700;color:rgba(212,73,10,.25);letter-spacing:-.02em;position:relative;z-index:1;text-align:center;padding:1rem;line-height:1.2}
+.pb{padding:1.4rem 1.7rem 1.7rem;flex:1;display:flex;flex-direction:column}
+.pcats{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.7rem}
+.pcat{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.14rem .48rem;border-radius:2px}
+.c-ros{background:#e8f0fa;color:#2a5aab}
+.c-ai{background:var(--ol);color:var(--orange)}
+.c-uav{background:#eaf5e8;color:#2a7a2a}
+.c-cv{background:#f5eaf5;color:#7a2a7a}
+.pt{font-family:var(--display);font-size:.97rem;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:.5rem;letter-spacing:-.01em;transition:color .2s}
+.pdesc{font-size:.8rem;color:var(--slate);line-height:1.75;margin-bottom:.9rem;flex:1}
+.po{font-size:.76rem;color:var(--navy2);font-weight:500;padding:.55rem .75rem;background:var(--ol);border-left:2px solid var(--orange);margin-bottom:.8rem;line-height:1.6;border-radius:0 2px 2px 0}
+.pst{font-family:var(--mono);font-size:.63rem;color:var(--muted);line-height:1.8;margin-top:auto;padding-top:.75rem;border-top:1px solid var(--rule)}
+.pst b{color:var(--slate);font-weight:500}
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 8rem 4rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg-text {
-    position: absolute;
-    right: -2rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    font-family: var(--display);
-    font-size: 22vw;
-    font-weight: 900;
-    color: rgba(0,229,255,0.025);
-    white-space: nowrap;
-    letter-spacing: -0.05em;
-    user-select: none;
-    pointer-events: none;
-    line-height: 1;
-  }
-  .hero-content {
-    max-width: 900px;
-    position: relative;
-  }
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 40px; height: 1px;
-    background: var(--accent);
-  }
-  .hero-name {
-    font-family: var(--display);
-    font-size: clamp(4rem, 9vw, 9rem);
-    font-weight: 900;
-    line-height: 0.9;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-  }
-  .hero-name span {
-    color: var(--accent);
-    display: block;
-  }
-  .hero-role {
-    font-family: var(--display);
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    font-weight: 300;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-  .hero-desc {
-    font-size: 1rem;
-    color: var(--text);
-    max-width: 560px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    border-left: 2px solid var(--accent);
-    padding-left: 1.5rem;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .btn-primary {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--accent);
-    border: none;
-    padding: 0.9rem 2rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  }
-  .btn-primary:hover {
-    background: var(--white);
-    transform: translateY(-2px);
-  }
-  .btn-secondary {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: transparent;
-    border: 1px solid var(--accent);
-    padding: 0.9rem 2rem;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover {
-    background: rgba(0,229,255,0.08);
-    transform: translateY(-2px);
-  }
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
-  }
-  .stat-item {}
-  .stat-num {
-    font-family: var(--display);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-  .scroll-indicator {
-    position: absolute;
-    bottom: 3rem;
-    right: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    writing-mode: vertical-rl;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
-  @keyframes scrollLine {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(0.6); }
-  }
+/* RESEARCH */
+#research{background:var(--paper)}
+.fr-feat{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--orange);padding:2rem 2.5rem;margin-bottom:2rem;border-radius:0 4px 4px 0}
+.rrow{display:grid;grid-template-columns:32px 1fr;border-top:1px solid var(--rule);padding:2rem 0;gap:1.5rem;align-items:start;transition:background .2s}
+.rrow:last-child{border-bottom:1px solid var(--rule)}
+.rrow:hover{background:rgba(212,73,10,.015)}
+.rn{font-family:var(--mono);font-size:.68rem;color:var(--orange);padding-top:.15rem}
+.rtit{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;letter-spacing:-.01em}
+.rdesc{font-size:.83rem;color:var(--slate);line-height:1.75;max-width:680px}
+.ra{display:inline-block;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#2a7a2a;background:#eaf5e8;padding:.1rem .45rem;border-radius:2px;margin-left:.6rem;vertical-align:middle;position:relative;top:-2px}
 
-  /* SECTION HEADERS */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  .section-num {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-  }
-  .section-title {
-    font-family: var(--display);
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.01em;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    margin-left: 1rem;
-  }
+/* CONTACT */
+#contact{background:var(--navy)}
+#contact .st{color:var(--white)}
+#contact .sn{background:rgba(212,73,10,.25);color:#ff8a5c}
+#contact .sr{background:rgba(255,255,255,.1)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.ch{font-family:var(--display);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:var(--white);line-height:.95;letter-spacing:-.03em;margin-bottom:1.5rem}
+.ch em{color:var(--orange);font-style:italic}
+.cs{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.85;max-width:420px}
+.cc-list{display:flex;flex-direction:column;gap:.8rem}
+.cc{display:flex;align-items:center;gap:1.2rem;padding:1.1rem 1.4rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:3px;text-decoration:none;transition:all .2s}
+.cc:hover{background:rgba(212,73,10,.13);border-color:rgba(212,73,10,.35);transform:translateX(4px)}
+.cc-ico{font-family:var(--mono);font-size:.82rem;color:var(--orange);width:2rem;flex-shrink:0;text-align:center}
+.cc-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cc-val{font-size:.83rem;color:rgba(255,255,255,.82);margin-top:.1rem}
+.cc-arr{margin-left:auto;color:rgba(255,255,255,.18);font-size:.82rem;transition:color .2s,transform .2s}
+.cc:hover .cc-arr{color:var(--orange);transform:translateX(3px)}
 
-  /* ABOUT */
-  #about {
-    padding: 8rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .about-left {}
-  .about-right {}
-  .about-text {
-    font-size: 1rem;
-    line-height: 1.9;
-    color: var(--text);
-    margin-bottom: 1.5rem;
-  }
-  .about-text strong {
-    color: var(--white);
-    font-weight: 500;
-  }
-  .about-highlight {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    padding: 1.5rem;
-    margin: 2rem 0;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--accent);
-    line-height: 1.8;
-  }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .skill-category {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 1.2rem;
-    transition: border-color 0.3s;
-  }
-  .skill-category:hover {
-    border-color: var(--accent);
-  }
-  .skill-cat-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-  .skill-items {
-    font-size: 0.82rem;
-    color: var(--text);
-    line-height: 1.8;
-  }
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);padding:1.8rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.fl{font-family:var(--display);font-size:.9rem;font-weight:700;color:rgba(255,255,255,.4)}
+.fl span{color:var(--orange)}
+.fr-t{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.22);letter-spacing:.05em}
 
-  /* EXPERIENCE */
-  #experience {
-    padding: 8rem 4rem;
-    background: var(--deep);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-  .exp-item:last-child { border-bottom: none; }
-  .exp-item::before {
-    content: '';
-    position: absolute;
-    left: 196px;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-  .exp-item:hover::before {
-    background: var(--accent);
-    transition: background 0.3s;
-  }
-  .exp-meta {}
-  .exp-date {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    line-height: 1.8;
-  }
-  .exp-location {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    margin-top: 0.3rem;
-  }
-  .exp-content {}
-  .exp-company {
-    font-family: var(--display);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    line-height: 1.1;
-  }
-  .exp-role {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0.5rem 0 1.2rem;
-  }
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-  .exp-bullets li {
-    font-size: 0.9rem;
-    color: var(--text);
-    padding-left: 1.2rem;
-    position: relative;
-    line-height: 1.7;
-  }
-  .exp-bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
-    top: 0.15em;
-  }
-  .exp-bullets li strong {
-    color: var(--white);
-    font-weight: 500;
-  }
-  .featured-badge {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--accent2);
-    padding: 0.2rem 0.7rem;
-    margin-left: 0.8rem;
-    vertical-align: middle;
-  }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
 
-  /* PROJECTS */
-  #projects {
-    padding: 8rem 4rem;
-  }
-  .projects-filter {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-  }
-  .filter-btn {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 0.5rem 1.2rem;
-    cursor: none;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: rgba(0,229,255,0.05);
-  }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 0;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-  }
-  .project-card.featured {
-    grid-column: span 2;
-  }
-  .project-img {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    display: block;
-    background: var(--surface);
-    position: relative;
-    overflow: hidden;
-  }
-  .project-img-placeholder {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: var(--surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-img-placeholder::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-  .project-img-placeholder .proj-icon {
-    font-family: var(--display);
-    font-size: 3rem;
-    font-weight: 900;
-    color: rgba(0,229,255,0.15);
-    letter-spacing: -0.05em;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    line-height: 1;
-    padding: 1rem;
-  }
-  .project-body {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-tags {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.8rem;
-  }
-  .tag {
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-  .tag.ros { border-color: rgba(0,229,255,0.3); color: var(--accent); }
-  .tag.ai { border-color: rgba(255,107,53,0.3); color: var(--accent2); }
-  .tag.uav { border-color: rgba(127,255,107,0.3); color: var(--accent3); }
-  .project-title {
-    font-family: var(--display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    margin-bottom: 0.6rem;
-  }
-  .project-desc {
-    font-size: 0.85rem;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    flex: 1;
-  }
-  .project-outcome {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--accent3);
-    border-top: 1px solid var(--border);
-    padding-top: 0.8rem;
-    margin-top: auto;
-    line-height: 1.6;
-  }
-  .project-outcome::before {
-    content: '// outcome: ';
-    color: var(--muted);
-  }
-  .project-stack {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    margin-top: 0.6rem;
-    line-height: 1.8;
-  }
-  .project-stack span { color: var(--accent); }
-
-  /* RESEARCH */
-  #research {
-    padding: 8rem 4rem;
-    background: var(--deep);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .research-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .research-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 1.8rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .research-item:hover { border-color: var(--accent); }
-  .research-item::after {
-    content: 'ACTIVE';
-    position: absolute;
-    top: 1.2rem; right: 1.2rem;
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    color: var(--accent3);
-    border: 1px solid var(--accent3);
-    padding: 0.15rem 0.5rem;
-  }
-  .research-title {
-    font-family: var(--display);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    line-height: 1.3;
-    margin-bottom: 0.7rem;
-    padding-right: 4rem;
-  }
-  .research-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .research-item.highlight {
-    grid-column: span 2;
-    background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(255,107,53,0.04));
-    border-color: rgba(0,229,255,0.2);
-  }
-
-  /* CONTACT */
-  #contact {
-    padding: 8rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .contact-left {}
-  .contact-big {
-    font-family: var(--display);
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 900;
-    color: var(--white);
-    line-height: 0.9;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-  .contact-big span { color: var(--accent); display: block; }
-  .contact-sub {
-    font-size: 0.95rem;
-    color: var(--text);
-    line-height: 1.8;
-    max-width: 400px;
-  }
-  .contact-right {}
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.2rem 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    transition: all 0.3s;
-    group: true;
-  }
-  .contact-link:hover {
-    border-color: var(--accent);
-    background: rgba(0,229,255,0.05);
-    transform: translateX(6px);
-  }
-  .contact-link-icon {
-    font-family: var(--mono);
-    font-size: 1.2rem;
-    color: var(--accent);
-    width: 2rem;
-    flex-shrink: 0;
-  }
-  .contact-link-info {}
-  .contact-link-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-  .contact-link-value {
-    font-size: 0.9rem;
-    color: var(--white);
-    margin-top: 0.1rem;
-  }
-  .contact-link-arrow {
-    margin-left: auto;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-    transition: color 0.2s, transform 0.2s;
-  }
-  .contact-link:hover .contact-link-arrow {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 2rem 4rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  .footer-text {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-  .footer-text span { color: var(--accent); }
-
-  /* ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* GLITCH EFFECT */
-  .glitch {
-    position: relative;
-  }
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    font-family: var(--display);
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-  }
-  .glitch::before {
-    color: var(--accent);
-    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
-    animation: glitch1 4s infinite linear;
-  }
-  .glitch::after {
-    color: var(--accent2);
-    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
-    animation: glitch2 4s infinite linear;
-  }
-  @keyframes glitch1 {
-    0%, 90%, 100% { transform: none; opacity: 0; }
-    92% { transform: translate(-3px, 0); opacity: 0.6; }
-    95% { transform: translate(3px, 0); opacity: 0.6; }
-    97% { transform: none; opacity: 0; }
-  }
-  @keyframes glitch2 {
-    0%, 93%, 100% { transform: none; opacity: 0; }
-    94% { transform: translate(3px, 0); opacity: 0.6; }
-    96% { transform: translate(-3px, 0); opacity: 0.6; }
-    98% { transform: none; opacity: 0; }
-  }
-
-  /* TYPING CURSOR */
-  .type-cursor::after {
-    content: '|';
-    animation: blink 1s step-end infinite;
-    color: var(--accent);
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* IMAGE UPLOAD HINT */
-  .img-hint {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    gap: 0.5rem;
-  }
-  .img-hint-text {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: rgba(0,229,255,0.3);
-    letter-spacing: 0.1em;
-    text-align: center;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 1024px) {
-    #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-    .project-card.featured { grid-column: span 1; }
-    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
-    .exp-item::before { display: none; }
-    nav { padding: 1.2rem 2rem; }
-    #hero, #about, #experience, #projects, #research, #contact, footer { padding-left: 2rem; padding-right: 2rem; }
-  }
-  @media (max-width: 640px) {
-    .projects-grid { grid-template-columns: 1fr; }
-    .research-grid { grid-template-columns: 1fr; }
-    .research-item.highlight { grid-column: span 1; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-  }
+/* RESPONSIVE */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .ag,.cg{grid-template-columns:1fr;gap:3rem}
+  .pg{grid-template-columns:repeat(2,1fr)}
+  .pc.wide{grid-column:span 1}
+  nav{padding:0 2rem}
+  .sw,footer{padding-left:2rem;padding-right:2rem}
+  .hero-left{padding:7rem 2rem 4rem}
+}
+@media(max-width:640px){
+  .pg{grid-template-columns:1fr}
+  .ei{grid-template-columns:1fr;gap:1rem}
+  .nav-links{display:none}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+}
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">// jame-carel.dev</a>
+  <a href="#hero" class="nav-logo">Jame Carel <span>M.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-text">ROBOTICS</div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Robotics & AI Engineer</div>
-    <h1 class="hero-name glitch" data-text="JAME">JAME
-      <span class="glitch" data-text="CAREL M">CAREL M</span>
-    </h1>
-    <div class="hero-role">Autonomous Systems · Embodied AI · ROS/ROS2</div>
-    <p class="hero-desc">
-      Building physical AI systems that bridge research and reality —
-      from SLAM robots and autonomous UAVs to imitation learning frameworks
-      and industry-deployed computer vision pipelines.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="https://github.com/jamecarel19" target="_blank" class="btn-secondary">GitHub ↗</a>
-      <a href="https://www.linkedin.com/in/jame-carel" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+  <div class="hero-left">
+    <div class="hero-tag">Robotics & AI Engineer</div>
+    <h1 class="hero-name">Jame<br>Carel <em>M.</em></h1>
+    <p class="hero-role">Autonomous Systems · Embodied AI · ROS/ROS2<br>B.Tech Robotics & Automation · Karunya · Class of 2027</p>
+    <p class="hero-desc">Building physical AI systems that bridge research and real-world deployment — from SLAM robots and autonomous UAVs to imitation learning frameworks and industry-commissioned CV pipelines at Daimler India.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-main">View Projects</a>
+      <a href="https://github.com/jamecarel19" target="_blank" class="btn-out">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/jame-carel" target="_blank" class="btn-out">LinkedIn ↗</a>
     </div>
     <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">11+</div>
-        <div class="stat-label">Projects Built</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Active Research</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2×</div>
-        <div class="stat-label">Industry Deployed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">3rd</div>
-        <div class="stat-label">Year · Karunya</div>
-      </div>
+      <div><div class="hs-num">11+</div><div class="hs-lbl">Projects built</div></div>
+      <div><div class="hs-num">5+</div><div class="hs-lbl">Active research</div></div>
+      <div><div class="hs-num">2×</div><div class="hs-lbl">Industry deployed</div></div>
+      <div><div class="hs-num">3rd</div><div class="hs-lbl">Year · 2027</div></div>
     </div>
   </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    Scroll
+  <div class="hero-right">
+    <div class="profile-card">
+      <!--
+        ADD YOUR PHOTO: replace the div below with:
+        <img src="profile.jpg" alt="Jame Carel M" class="profile-photo">
+      -->
+      <div class="profile-ph">JC</div>
+      <div class="profile-name">Jame Carel M</div>
+      <div class="profile-title">B.Tech Robotics & Automation Engineering<br>Karunya Institute · Coimbatore</div>
+      <div class="profile-links">
+        <a href="mailto:jamecarel@karunya.edu.in" class="plink"><span class="plink-icon">@</span>jamecarel@karunya.edu.in</a>
+        <a href="https://github.com/jamecarel19" target="_blank" class="plink"><span class="plink-icon">&lt;/&gt;</span>github.com/jamecarel19</a>
+        <a href="https://www.linkedin.com/in/jame-carel" target="_blank" class="plink"><span class="plink-icon">in</span>linkedin.com/in/jame-carel</a>
+        <a href="tel:+917204667498" class="plink"><span class="plink-icon">#</span>+91 7204667498</a>
+      </div>
+    </div>
+    <div class="side-block">
+      <div class="side-lbl">Currently working on</div>
+      <div class="side-txt"><strong>Commission-based autonomous robot</strong> for Daimler India (DICV) — autonomous AC cassette servicing system for their Chennai manufacturing plant.</div>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
-  <div class="about-left fade-up">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">About</h2>
-      <div class="section-line"></div>
-    </div>
-    <p class="about-text">
-      I'm a 3rd-year <strong>Robotics & Automation Engineering</strong> student at Karunya Institute of Technology and Sciences, Coimbatore — specialising in autonomous systems, embodied AI, and the full robotics software stack from perception to control.
-    </p>
-    <p class="about-text">
-      My work spans <strong>ROS/ROS2 navigation</strong>, visual SLAM, UAV autonomy, imitation learning, and computer vision — built across real hardware: NVIDIA Jetson, Raspberry Pi, Pixhawk, ZED2i, and LeRobot S101 with NVIDIA Thor.
-    </p>
-    <div class="about-highlight">
-      > Currently engineering a <strong>commission-based autonomous robot</strong><br>
-      &nbsp;&nbsp;for Daimler India (DICV) — autonomous AC cassette servicing<br>
-      &nbsp;&nbsp;for their Chennai manufacturing plant.
-    </div>
-    <p class="about-text">
-      I'm interested in roles at the intersection of <strong>robotics software engineering and AI research</strong> — where systems actually move, perceive, and act in the physical world.
-    </p>
-  </div>
-  <div class="about-right fade-up">
-    <div class="skills-grid">
-      <div class="skill-category">
-        <div class="skill-cat-label">Languages</div>
-        <div class="skill-items">Python · C/C++</div>
+  <div class="sw">
+    <div class="sl reveal"><span class="sn">01</span><h2 class="st">About</h2><div class="sr"></div></div>
+    <div class="ag">
+      <div class="reveal">
+        <p class="at">I'm a 3rd-year <strong>Robotics & Automation Engineering</strong> student at Karunya Institute of Technology and Sciences, Coimbatore — building real systems across the full autonomy stack: perception, planning, control, and learning.</p>
+        <p class="at">My work spans <strong>ROS/ROS2 navigation</strong>, visual SLAM, UAV autonomy, imitation learning, and computer vision — deployed on real hardware including NVIDIA Jetson Nano, Raspberry Pi, Pixhawk flight controllers, ZED2i depth cameras, and the LeRobot S101 with NVIDIA Thor.</p>
+        <div class="aq">"Selected by Daimler India management to lead an industry–academia collaboration — bringing a live manufacturing problem to university for solution development and deployment."</div>
+        <p class="at">Seeking <strong>robotics software engineering and research roles</strong> where systems actually move, perceive, and act in the physical world. Available for full-time roles, research positions, and industry collaborations.</p>
       </div>
-      <div class="skill-category">
-        <div class="skill-cat-label">Robotics</div>
-        <div class="skill-items">ROS · ROS2 · Navigation Stack · SLAM · MoveIt · DroneKit</div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-cat-label">AI / CV</div>
-        <div class="skill-items">PyTorch · OpenCV · YOLO · MediaPipe · Transformers · Imitation Learning</div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-cat-label">Hardware</div>
-        <div class="skill-items">Jetson Nano · NVIDIA Thor · Raspberry Pi · Pixhawk · LiDAR · ZED2i · LeRobot S101</div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-cat-label">Simulation</div>
-        <div class="skill-items">CARLA · Gazebo · Webots · RViz</div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-cat-label">Tools</div>
-        <div class="skill-items">Git · Docker · Linux · Fusion 360 · SolidWorks</div>
+      <div class="reveal">
+        <div class="sk-ttl">Technical Skills</div>
+        <div class="sk-grp"><div class="sk-gl">Languages</div><div class="sk-row"><span class="sk">Python</span><span class="sk">C/C++</span></div></div>
+        <div class="sk-grp"><div class="sk-gl">Robotics & Autonomy</div><div class="sk-row"><span class="sk">ROS</span><span class="sk">ROS2</span><span class="sk">Navigation Stack</span><span class="sk">SLAM</span><span class="sk">MoveIt</span><span class="sk">DroneKit</span><span class="sk">QGroundControl</span></div></div>
+        <div class="sk-grp"><div class="sk-gl">AI / Computer Vision</div><div class="sk-row"><span class="sk">PyTorch</span><span class="sk">OpenCV</span><span class="sk">YOLO</span><span class="sk">MediaPipe</span><span class="sk">Transformers</span><span class="sk">Imitation Learning</span></div></div>
+        <div class="sk-grp"><div class="sk-gl">Hardware & Embedded</div><div class="sk-row"><span class="sk">Jetson Nano</span><span class="sk">NVIDIA Thor</span><span class="sk">Raspberry Pi</span><span class="sk">Pixhawk</span><span class="sk">LiDAR</span><span class="sk">ZED2i</span><span class="sk">LeRobot S101</span></div></div>
+        <div class="sk-grp"><div class="sk-gl">Simulation & Tools</div><div class="sk-row"><span class="sk">CARLA</span><span class="sk">Gazebo</span><span class="sk">Webots</span><span class="sk">RViz</span><span class="sk">Docker</span><span class="sk">Linux</span><span class="sk">Fusion 360</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
-  <div style="padding: 0 0 4rem;">
-    <div class="section-header fade-up">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Experience</h2>
-      <div class="section-line"></div>
-    </div>
-  </div>
+  <div class="sw">
+    <div class="sl reveal"><span class="sn">02</span><h2 class="st">Experience</h2><div class="sr"></div></div>
 
-  <div class="exp-item fade-up">
-    <div class="exp-meta">
-      <div class="exp-date">May 2025<br>— July 2025<br>+ ongoing</div>
-      <div class="exp-location">Chennai, India</div>
+    <div class="ei reveal">
+      <div>
+        <div class="ed">May 2025 — July 2025<br>+ ongoing project</div>
+        <div class="el">Chennai, India</div>
+      </div>
+      <div>
+        <div class="ec">Daimler India Commercial Vehicles (DICV)<span class="eb">Industry</span></div>
+        <div class="er">Computer Vision & Robotics Engineer (Industry-Sponsored)</div>
+        <ul class="ebulls">
+          <li>Designed and deployed a <strong>computer vision pipeline</strong> for automated faulty tin plate detection on the manufacturing line — matching stamped part numbers to vehicle assembly records, replacing a fully manual inspection process.</li>
+          <li>Personally selected by DICV management to lead an <strong>industry–academia collaboration</strong>; awarded extended engagement upon successful proof-of-concept delivery.</li>
+          <li>Currently developing a <strong>commission-based autonomous mobile robot</strong> for DICV's maintenance department — autonomously services ceiling-mounted AC cassette units across the plant floor.</li>
+        </ul>
+      </div>
     </div>
-    <div class="exp-content">
-      <div class="exp-company">Daimler India Commercial Vehicles (DICV) <span class="featured-badge">Industry</span></div>
-      <div class="exp-role">Computer Vision & Robotics Engineer (Industry-Sponsored)</div>
-      <ul class="exp-bullets">
-        <li>Designed and deployed a <strong>computer vision pipeline</strong> for automated faulty tin plate detection on the manufacturing line — matching stamped part numbers to vehicle assembly records, replacing a fully manual inspection process.</li>
-        <li>Personally selected by DICV management to lead an <strong>industry–academia collaboration</strong>, bringing the live industrial problem to Karunya; awarded extended engagement upon successful proof-of-concept.</li>
-        <li>Currently leading development of a <strong>commission-based autonomous mobile robot</strong> for DICV's maintenance department — designed to autonomously service ceiling-mounted AC cassette units across the plant floor.</li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="exp-item fade-up">
-    <div class="exp-meta">
-      <div class="exp-date">Sep 2024<br>— Present</div>
-      <div class="exp-location">Coimbatore, India</div>
+    <div class="ei reveal">
+      <div>
+        <div class="ed">Sep 2024 — Present</div>
+        <div class="el">Coimbatore, India</div>
+      </div>
+      <div>
+        <div class="ec">Karunya Innovation & Design Studio (KIDS)</div>
+        <div class="er">Robotics Researcher — Autonomous Systems & Computer Vision</div>
+        <ul class="ebulls">
+          <li>Developed and deployed real-time AI/ML systems for <strong>autonomous navigation and object detection</strong> using NVIDIA Jetson Nano; contributed to KHacks robotics challenges with hands-on hardware–software integration.</li>
+        </ul>
+      </div>
     </div>
-    <div class="exp-content">
-      <div class="exp-company">Karunya Innovation & Design Studio (KIDS)</div>
-      <div class="exp-role">Robotics Researcher — Autonomous Systems & CV</div>
-      <ul class="exp-bullets">
-        <li>Developed and deployed real-time AI/ML systems for <strong>autonomous navigation and object detection</strong> using NVIDIA Jetson Nano; contributed to KHacks robotics challenges with hands-on hardware and software integration.</li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="exp-item fade-up">
-    <div class="exp-meta">
-      <div class="exp-date">July 2025<br>— Present</div>
-      <div class="exp-location">Coimbatore, India</div>
-    </div>
-    <div class="exp-content">
-      <div class="exp-company">CAIRA</div>
-      <div class="exp-role">Technical Associate</div>
-      <ul class="exp-bullets">
-        <li>Initiated and organised robotics-focused student clubs, technical workshops, and department events to build a culture of applied innovation within the engineering faculty.</li>
-      </ul>
+    <div class="ei reveal">
+      <div>
+        <div class="ed">July 2025 — Present</div>
+        <div class="el">Coimbatore, India</div>
+      </div>
+      <div>
+        <div class="ec">CAIRA</div>
+        <div class="er">Technical Associate</div>
+        <ul class="ebulls">
+          <li>Initiated and organised robotics-focused student clubs, technical workshops, and department events to build a culture of applied innovation within the engineering faculty.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header fade-up">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Projects</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="projects-filter fade-up">
-    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
-    <button class="filter-btn" onclick="filterProjects('ros', this)">ROS / Navigation</button>
-    <button class="filter-btn" onclick="filterProjects('ai', this)">AI / Learning</button>
-    <button class="filter-btn" onclick="filterProjects('uav', this)">UAV / Drones</button>
-    <button class="filter-btn" onclick="filterProjects('cv', this)">Computer Vision</button>
-  </div>
-
-  <div class="projects-grid" id="projectsGrid">
-
-    <!-- Featured: LeRobot -->
-    <div class="project-card featured fade-up" data-tags="ai ros">
-      <div class="project-img-placeholder">
-        <!-- Replace with: <img src="your-lerobot-image.jpg" alt="LeRobot S101" class="project-img"> -->
-        <div class="proj-icon">LEROBOT<br>S101</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag ai">Embodied AI</span>
-          <span class="tag ros">ROS2</span>
-          <span class="tag">Imitation Learning</span>
-          <span class="tag">NVIDIA Thor</span>
-        </div>
-        <div class="project-title">Embodied Skill Acquisition — LeRobot S101 & NVIDIA Thor</div>
-        <div class="project-desc">Built a leader–follower teleoperation system to capture human demonstrations and train embodied action models. One of very few undergrad implementations using this hardware stack globally.</div>
-        <div class="project-outcome">Successfully trained deployable imitation learning policies on real hardware.</div>
-        <div class="project-stack"><span>Stack:</span> LeRobot S101, NVIDIA Thor, Solo-CLI, Python, Teleoperation, Dataset Curation</div>
-      </div>
+  <div class="sw">
+    <div class="sl reveal"><span class="sn">03</span><h2 class="st">Projects</h2><div class="sr"></div></div>
+    <div class="fr reveal">
+      <button class="fb active" onclick="fp('all',this)">All</button>
+      <button class="fb" onclick="fp('ros',this)">ROS / Navigation</button>
+      <button class="fb" onclick="fp('ai',this)">AI / Learning</button>
+      <button class="fb" onclick="fp('uav',this)">UAV / Drones</button>
+      <button class="fb" onclick="fp('cv',this)">Computer Vision</button>
     </div>
+    <div class="pg reveal" id="pg">
 
-    <!-- VLA -->
-    <div class="project-card fade-up" data-tags="ai ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">VLA<br>FRAMEWORK</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag ai">VLA</span>
-          <span class="tag ros">ROS2</span>
-          <span class="tag">PyTorch</span>
+      <div class="pc wide" data-t="ai ros">
+        <div class="piw"><!-- <img src="lerobot.jpg" alt="LeRobot"> -->
+          <div class="pp"><div class="ppt">LeRobot S101<br>+ NVIDIA Thor</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-ai">Embodied AI</span><span class="pcat c-ros">ROS2</span><span class="pcat c-ai">Imitation Learning</span></div>
+          <div class="pt">Embodied Skill Acquisition — LeRobot S101 & NVIDIA Thor</div>
+          <div class="pdesc">Leader–follower teleoperation system to capture human demonstrations and train embodied action models. One of very few undergraduate implementations of this hardware stack globally.</div>
+          <div class="po">Successfully trained and deployed imitation learning policies on real hardware.</div>
+          <div class="pst"><b>Stack:</b> LeRobot S101, NVIDIA Thor, Solo-CLI, Python, Teleoperation, Dataset Curation</div>
         </div>
-        <div class="project-title">VLA Imitation Learning Framework</div>
-        <div class="project-desc">End-to-end framework for multimodal dataset collection and training of a vision-language-action policy for autonomous robot manipulation.</div>
-        <div class="project-outcome">Deployable control policy with sim-to-real transfer via Webots.</div>
-        <div class="project-stack"><span>Stack:</span> ROS2, Webots, PyTorch, Transformers, IK, GPU</div>
       </div>
-    </div>
 
-    <!-- SLAM -->
-    <div class="project-card fade-up" data-tags="ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">SLAM<br>NAV</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag ros">SLAM</span>
-          <span class="tag ros">ROS</span>
-          <span class="tag">LiDAR</span>
+      <div class="pc" data-t="ai ros">
+        <div class="piw"><!-- <img src="vla.jpg" alt="VLA"> -->
+          <div class="pp"><div class="ppt">VLA Imitation<br>Learning</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-ai">VLA</span><span class="pcat c-ros">ROS2</span><span class="pcat c-ai">PyTorch</span></div>
+          <div class="pt">VLA Imitation Learning Framework</div>
+          <div class="pdesc">End-to-end framework for multimodal dataset collection and training a vision-language-action policy for autonomous robot manipulation.</div>
+          <div class="po">Deployable control policy with sim-to-real transfer via Webots.</div>
+          <div class="pst"><b>Stack:</b> ROS2, Webots, PyTorch, Transformers, IK, GPU</div>
         </div>
-        <div class="project-title">Bayesian SLAM — Autonomous Mobile Robot Navigation</div>
-        <div class="project-desc">Full SLAM robot using ROS, LiDAR, and Raspberry Pi for real-time autonomous mapping and navigation in unknown environments.</div>
-        <div class="project-outcome">Real-time indoor mapping; validated path planning in RViz + Gazebo.</div>
-        <div class="project-stack"><span>Stack:</span> LiDAR, RPi, ROS, RViz, Gazebo, Nav Stack</div>
       </div>
-    </div>
 
-    <!-- UAV VSLAM -->
-    <div class="project-card fade-up" data-tags="uav ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">UAV<br>VSLAM</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag uav">UAV</span>
-          <span class="tag">VSLAM</span>
-          <span class="tag ros">ROS</span>
+      <div class="pc" data-t="ros">
+        <div class="piw"><!-- <img src="slam.jpg" alt="SLAM"> -->
+          <div class="pp"><div class="ppt">Bayesian<br>SLAM</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-ros">SLAM</span><span class="pcat c-ros">ROS</span><span class="pcat c-ros">LiDAR</span></div>
+          <div class="pt">Bayesian SLAM — Autonomous Mobile Robot Navigation</div>
+          <div class="pdesc">Full SLAM robot using ROS, LiDAR, and Raspberry Pi for real-time autonomous mapping and navigation in unknown environments.</div>
+          <div class="po">Real-time indoor mapping; path planning validated in RViz & Gazebo.</div>
+          <div class="pst"><b>Stack:</b> LiDAR, RPi, ROS, RViz, Gazebo, Nav Stack</div>
         </div>
-        <div class="project-title">Autonomous UAV — VSLAM Navigation & Obstacle Avoidance</div>
-        <div class="project-desc">Autonomous UAV navigating predefined waypoints using Visual SLAM for real-time localisation, mapping, and dynamic obstacle avoidance.</div>
-        <div class="project-outcome">Stable autonomous flight with real-time visual localisation.</div>
-        <div class="project-stack"><span>Stack:</span> QGC, Flight Controller, ROS, DroneKit, LiDAR</div>
       </div>
-    </div>
 
-    <!-- CARLA -->
-    <div class="project-card fade-up" data-tags="ai cv ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">CARLA<br>ROS2</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag">CARLA</span>
-          <span class="tag ros">ROS2</span>
-          <span class="tag cv">YOLO</span>
+      <div class="pc" data-t="uav ros">
+        <div class="piw"><!-- <img src="uav.jpg" alt="UAV"> -->
+          <div class="pp"><div class="ppt">Autonomous<br>UAV VSLAM</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-uav">UAV</span><span class="pcat c-ros">VSLAM</span><span class="pcat c-ros">ROS</span></div>
+          <div class="pt">Autonomous UAV — VSLAM Navigation & Obstacle Avoidance</div>
+          <div class="pdesc">Autonomous UAV navigating predefined waypoints using Visual SLAM for real-time localisation, mapping, and dynamic obstacle avoidance.</div>
+          <div class="po">Stable autonomous flight with real-time visual localisation.</div>
+          <div class="pst"><b>Stack:</b> QGC, Flight Controller, ROS, DroneKit, LiDAR</div>
         </div>
-        <div class="project-title">CARLA–ROS2 Autonomous Driving Pipeline</div>
-        <div class="project-desc">Simulation-based perception and control framework for autonomous vehicle navigation with sensor fusion and YOLO object detection.</div>
-        <div class="project-stack"><span>Stack:</span> CARLA, ROS2, Python, Sensor Fusion, YOLO, Gazebo</div>
       </div>
-    </div>
 
-    <!-- Gesture Manipulator -->
-    <div class="project-card fade-up" data-tags="cv ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">GESTURE<br>ARM</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag cv">Computer Vision</span>
-          <span class="tag ros">ROS2</span>
-          <span class="tag">MediaPipe</span>
+      <div class="pc" data-t="ai cv ros">
+        <div class="piw"><!-- <img src="carla.jpg" alt="CARLA"> -->
+          <div class="pp"><div class="ppt">CARLA<br>ROS2 AV</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-ros">ROS2</span><span class="pcat c-cv">YOLO</span><span class="pcat c-ai">Sensor Fusion</span></div>
+          <div class="pt">CARLA–ROS2 Autonomous Driving Simulation Pipeline</div>
+          <div class="pdesc">Perception and control framework for autonomous vehicle navigation in CARLA simulator with YOLO object detection and sensor fusion.</div>
+          <div class="pst"><b>Stack:</b> CARLA, ROS2, Python, YOLO, Nav Stack, Gazebo</div>
         </div>
-        <div class="project-title">Gesture-Based Manipulator Control</div>
-        <div class="project-desc">Vision-guided gesture control system for the Interbotix robotic arm using MediaPipe hand tracking, OpenCV, and ROS2.</div>
-        <div class="project-stack"><span>Stack:</span> ROS2 Humble, Interbotix, OpenCV, MediaPipe</div>
       </div>
-    </div>
 
-    <!-- 3D Mapping -->
-    <div class="project-card fade-up" data-tags="cv ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">3D<br>MAP</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag cv">3D Mapping</span>
-          <span class="tag ros">ROS2</span>
-          <span class="tag">ZED2i</span>
+      <div class="pc" data-t="cv ros">
+        <div class="piw"><!-- <img src="gesture.jpg" alt="Gesture"> -->
+          <div class="pp"><div class="ppt">Gesture<br>Arm Control</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-cv">Computer Vision</span><span class="pcat c-ros">ROS2</span></div>
+          <div class="pt">Gesture-Based Manipulator Control</div>
+          <div class="pdesc">Vision-guided gesture control of the Interbotix robotic arm using MediaPipe hand tracking and ROS2 Humble.</div>
+          <div class="pst"><b>Stack:</b> ROS2 Humble, Interbotix, OpenCV, MediaPipe</div>
         </div>
-        <div class="project-title">3D Campus Mapping — ZED 2i Depth Camera</div>
-        <div class="project-desc">Created full 3D maps of a large campus building using RTAB-Map and ZED2i stereo camera with ROS2 integration.</div>
-        <div class="project-stack"><span>Stack:</span> ZED2i, RTAB-Map, ROS2, Depth Sensing</div>
       </div>
-    </div>
 
-    <!-- Rocker Bogie -->
-    <div class="project-card fade-up" data-tags="ros">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">ROVER<br>6WD</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag ros">Rover</span>
-          <span class="tag">LiDAR</span>
-          <span class="tag">Embedded</span>
+      <div class="pc" data-t="cv ros">
+        <div class="piw"><!-- <img src="zed.jpg" alt="ZED"> -->
+          <div class="pp"><div class="ppt">3D Campus<br>Mapping</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-cv">3D Mapping</span><span class="pcat c-ros">ROS2</span></div>
+          <div class="pt">3D Campus Mapping — ZED 2i Depth Camera</div>
+          <div class="pdesc">Full 3D maps of a large campus building using RTAB-Map and ZED2i stereo depth camera with ROS2 integration.</div>
+          <div class="pst"><b>Stack:</b> ZED2i, RTAB-Map, ROS2, Depth Sensing</div>
         </div>
-        <div class="project-title">Rocker-Bogie Terrain-Adaptive Mobility Platform</div>
-        <div class="project-desc">Designed and built a 6-wheeled rover using rocker-bogie suspension (Mars rover architecture) for stable autonomous traversal over uneven terrain.</div>
-        <div class="project-stack"><span>Stack:</span> MCU, LiDAR, Proportional Control, DC Motors</div>
       </div>
-    </div>
 
-    <!-- Speech UAV -->
-    <div class="project-card fade-up" data-tags="uav ai">
-      <div class="project-img-placeholder">
-        <div class="proj-icon">VOICE<br>UAV</div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag uav">UAV</span>
-          <span class="tag ai">Whisper</span>
-          <span class="tag">Voice</span>
+      <div class="pc" data-t="ros">
+        <div class="piw"><!-- <img src="rover.jpg" alt="Rover"> -->
+          <div class="pp"><div class="ppt">Rocker-Bogie<br>Rover</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-ros">Rover</span><span class="pcat c-ros">Embedded</span></div>
+          <div class="pt">Rocker-Bogie Terrain-Adaptive Mobility Platform</div>
+          <div class="pdesc">6-wheeled rover using rocker-bogie suspension (Mars rover architecture) for stable autonomous traversal over uneven terrain.</div>
+          <div class="pst"><b>Stack:</b> Microcontroller, LiDAR, Proportional Control, DC Motors</div>
         </div>
-        <div class="project-title">Speech-Driven Autonomous UAV Control</div>
-        <div class="project-desc">Voice-controlled UAV enabling hands-free autonomous flight via real-time speech recognition using OpenAI Whisper.</div>
-        <div class="project-stack"><span>Stack:</span> OpenAI Whisper, Pixhawk, DroneKit</div>
       </div>
-    </div>
 
+      <div class="pc" data-t="uav ai">
+        <div class="piw"><!-- <img src="voice.jpg" alt="Voice UAV"> -->
+          <div class="pp"><div class="ppt">Voice-Driven<br>UAV</div></div></div>
+        <div class="pb">
+          <div class="pcats"><span class="pcat c-uav">UAV</span><span class="pcat c-ai">Whisper AI</span></div>
+          <div class="pt">Speech-Driven Autonomous UAV Control</div>
+          <div class="pdesc">Voice-controlled UAV enabling hands-free autonomous flight via real-time speech recognition using OpenAI Whisper.</div>
+          <div class="pst"><b>Stack:</b> OpenAI Whisper, Pixhawk, DroneKit</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- RESEARCH -->
 <section id="research">
-  <div class="section-header fade-up">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Current Research</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="research-grid">
-    <div class="research-item highlight fade-up">
-      <div class="research-title">Autonomous AC Cassette Servicing Robot — DICV Commission</div>
-      <div class="research-desc">Industry-commissioned autonomous mobile robot for Daimler India's maintenance department. Designed to independently service and clean ceiling-mounted AC cassette units across a large-scale commercial vehicle manufacturing plant, eliminating the need for manual access at height. Active development and validation phase.</div>
+  <div class="sw">
+    <div class="sl reveal"><span class="sn">04</span><h2 class="st">Current Research</h2><div class="sr"></div></div>
+    <div class="fr-feat reveal">
+      <div class="rtit">Autonomous AC Cassette Servicing Robot — DICV Commission <span class="ra">Active</span></div>
+      <div class="rdesc" style="margin-top:.6rem">Industry-commissioned autonomous mobile robot for Daimler India's maintenance department. Designed to independently service and clean ceiling-mounted AC cassette units across a large-scale commercial vehicle manufacturing plant — eliminating the need for manual access at height. Currently in active development and validation with DICV engineering teams.</div>
     </div>
-    <div class="research-item fade-up">
-      <div class="research-title">Embodied Manipulation Platform — ALOHA Architecture</div>
-      <div class="research-desc">Implementing a bimanual robotic manipulation system inspired by Stanford's ALOHA for physical AI and dexterous task learning research.</div>
-    </div>
-    <div class="research-item fade-up">
-      <div class="research-title">Scalable Demo Collection for Embodied Foundation Models</div>
-      <div class="research-desc">Building scalable teleoperation and simulation pipelines to generate large multimodal datasets for training embodied foundation models.</div>
-    </div>
-    <div class="research-item fade-up">
-      <div class="research-title">Hybrid VTOL Platform — Nidar Competition</div>
-      <div class="research-desc">Engineering a hybrid VTOL aircraft merging fixed-wing efficiency with multirotor agility for competitive autonomous flight challenges.</div>
-    </div>
-    <div class="research-item fade-up">
-      <div class="research-title">GPS-Denied Autonomous UAV Navigation</div>
-      <div class="research-desc">Vision-based navigation system for drones operating in environments where GPS is unavailable or unreliable — indoor and contested environments.</div>
-    </div>
-    <div class="research-item fade-up">
-      <div class="research-title">Autonomous Aerial Harvesting Platform for MSMEs</div>
-      <div class="research-desc">Non-invasive aerial harvesting drone designed for lotus flower collection to support small-scale agricultural enterprises.</div>
+    <div>
+      <div class="rrow reveal"><div class="rn">01</div><div><div class="rtit">Embodied Manipulation Platform — ALOHA Architecture <span class="ra">Active</span></div><div class="rdesc">Implementing a bimanual robotic manipulation system inspired by Stanford's ALOHA for physical AI and dexterous task learning research.</div></div></div>
+      <div class="rrow reveal"><div class="rn">02</div><div><div class="rtit">Scalable Demo Collection for Embodied Foundation Models <span class="ra">Active</span></div><div class="rdesc">Building scalable teleoperation and simulation pipelines to generate large multimodal datasets for training embodied foundation models.</div></div></div>
+      <div class="rrow reveal"><div class="rn">03</div><div><div class="rtit">Hybrid VTOL Autonomous Flight Platform — Nidar Competition <span class="ra">Active</span></div><div class="rdesc">Engineering a hybrid VTOL aircraft merging fixed-wing efficiency with multirotor agility for competitive autonomous flight challenges.</div></div></div>
+      <div class="rrow reveal"><div class="rn">04</div><div><div class="rtit">GPS-Denied Autonomous UAV Navigation <span class="ra">Active</span></div><div class="rdesc">Vision-based navigation for drones operating in GPS-unavailable or contested environments — indoor and urban settings.</div></div></div>
+      <div class="rrow reveal"><div class="rn">05</div><div><div class="rtit">Autonomous Aerial Harvesting Platform for MSMEs <span class="ra">Active</span></div><div class="rdesc">Non-invasive aerial harvesting drone for lotus flower collection to support small-scale agricultural enterprises.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="contact-left fade-up">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2 class="section-title">Contact</h2>
-    </div>
-    <div class="contact-big">
-      LET'S<br><span>BUILD</span><br>SOMETHING.
-    </div>
-    <p class="contact-sub">
-      Open to robotics software engineering roles, research positions, and collaborations. Based in India — available for remote and relocation opportunities.
-    </p>
-  </div>
-  <div class="contact-right fade-up">
-    <div class="contact-links">
-      <a href="mailto:jamecarel@karunya.edu.in" class="contact-link">
-        <div class="contact-link-icon">@</div>
-        <div class="contact-link-info">
-          <div class="contact-link-label">Email</div>
-          <div class="contact-link-value">jamecarel@karunya.edu.in</div>
-        </div>
-        <div class="contact-link-arrow">→</div>
-      </a>
-      <a href="https://github.com/jamecarel19" target="_blank" class="contact-link">
-        <div class="contact-link-icon">&lt;/&gt;</div>
-        <div class="contact-link-info">
-          <div class="contact-link-label">GitHub</div>
-          <div class="contact-link-value">github.com/jamecarel19</div>
-        </div>
-        <div class="contact-link-arrow">→</div>
-      </a>
-      <a href="https://www.linkedin.com/in/jame-carel" target="_blank" class="contact-link">
-        <div class="contact-link-icon">in</div>
-        <div class="contact-link-info">
-          <div class="contact-link-label">LinkedIn</div>
-          <div class="contact-link-value">linkedin.com/in/jame-carel</div>
-        </div>
-        <div class="contact-link-arrow">→</div>
-      </a>
-      <a href="tel:+917204667498" class="contact-link">
-        <div class="contact-link-icon">#</div>
-        <div class="contact-link-info">
-          <div class="contact-link-label">Phone</div>
-          <div class="contact-link-value">+91 7204667498</div>
-        </div>
-        <div class="contact-link-arrow">→</div>
-      </a>
+  <div class="sw">
+    <div class="sl reveal"><span class="sn">05</span><h2 class="st">Contact</h2><div class="sr"></div></div>
+    <div class="cg">
+      <div class="reveal">
+        <div class="ch">Open to<br><em>great</em><br>opportunities.</div>
+        <p class="cs">Seeking robotics software engineering and research roles — full-time, internship, or research collaboration. Based in India, available for remote and relocation. Reach out directly.</p>
+      </div>
+      <div class="cc-list reveal">
+        <a href="mailto:jamecarel@karunya.edu.in" class="cc"><div class="cc-ico">@</div><div><div class="cc-lbl">Email</div><div class="cc-val">jamecarel@karunya.edu.in</div></div><div class="cc-arr">→</div></a>
+        <a href="https://github.com/jamecarel19" target="_blank" class="cc"><div class="cc-ico">&lt;/&gt;</div><div><div class="cc-lbl">GitHub</div><div class="cc-val">github.com/jamecarel19</div></div><div class="cc-arr">→</div></a>
+        <a href="https://www.linkedin.com/in/jame-carel" target="_blank" class="cc"><div class="cc-ico">in</div><div><div class="cc-lbl">LinkedIn</div><div class="cc-val">linkedin.com/in/jame-carel</div></div><div class="cc-arr">→</div></a>
+        <a href="tel:+917204667498" class="cc"><div class="cc-ico">#</div><div><div class="cc-lbl">Phone</div><div class="cc-val">+91 7204667498</div></div><div class="cc-arr">→</div></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-text">© 2025 <span>Jame Carel M</span> — Robotics & AI Engineer</div>
-  <div class="footer-text">B.Tech RA · <span>Karunya Institute</span> · Class of 2027</div>
+  <div class="fl">Jame Carel <span>M.</span></div>
+  <div class="fr-t">B.Tech Robotics & Automation · Karunya Institute · Class of 2027</div>
 </footer>
 
 <script>
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width = '48px';
-      ring.style.height = '48px';
-      ring.style.opacity = '1';
-      ring.style.borderColor = 'var(--accent2)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width = '32px';
-      ring.style.height = '32px';
-      ring.style.opacity = '0.5';
-      ring.style.borderColor = 'var(--accent)';
-    });
-  });
-
-  // SCROLL ANIMATIONS
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 80);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // PROJECT FILTER
-  function filterProjects(tag, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.project-card').forEach(card => {
-      if (tag === 'all') {
-        card.style.display = 'flex';
-      } else {
-        const tags = card.dataset.tags || '';
-        card.style.display = tags.includes(tag) ? 'flex' : 'none';
-      }
-    });
-  }
-
-  // ACTIVE NAV HIGHLIGHT
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
-    });
-  }, { passive: true });
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function fp(t,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.pc').forEach(c=>{c.style.display=(t==='all'||(c.dataset.t||'').includes(t))?'flex':'none'})}
+const secs=document.querySelectorAll('section[id]'),lks=document.querySelectorAll('.nav-links a:not(.nav-cta)');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id});lks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--orange)':''})},{passive:true});
 </script>
 </body>
 </html>
